@@ -1,32 +1,33 @@
-public class Demo3 {
+trigger AccountTrigger on Account (before insert, before update, after update, after insert) 
+{
+    Account.TriggerHandler handler = new AccountTriggerHandler(Trigger.isExecuting, Trigger.size);
+    
+     if( Trigger.isInsert){
+         
+         if(Trigger.isBefore) {
+          handler.onBeforeInsert(trigger.New);
+        System.debug('handler.onBeforeInsert ::: ');
 
-    public void mainValueMethod (){
-        String websiteUrl = 'www.rohito.com';
-
-        System.debug('Before value call ' + websiteUrl); 
-        passByValueCall(websiteUrl);
-        System.debug('After value call ' + websiteUrl); 
+         }
+         else {
+             
+        handler.OnAfterInsert(trigger.New);
+         }
+         
     }
+    
+    else if(Trigger.isUpdate ){
+        
+        if(Trigger.isBefore){
+                    handler.OnBeforeUpdate(trigger.New, trigger.Old, Trigger.NewMap, Trigger.OldMap);
 
-    private void passByValueCall(String websiteUrlValue) {  // Pass by Value Call
-        websiteUrlValue = 'www.salesforce.com';
+        }
+         else {
+        handler.OnAfterUpdate(trigger.New, trigger.Old, Trigger.NewMap, Trigger.OldMap);
     }
-
-    public void mainReferenceMethod(){
-
-        // NON PRIMITIVE TYPE / COMPLEX TYPE 
-        Account a = new Account(); 
-        a.Name = ' Test Account';
-        a.Website = 'www.rohito.com';
-
-        System.debug('Before reference call ' + a ); 
-        passByRefCall(a); 
-        System.debug(' After reference call ' + a ); 
+        
     }
-    public void passByRefCall(Account a ) { // PASS BY REFERENCE CALL 
-
-        a.Website = 'www.salesforce.com';
-        // Comments
-
-    }
+   
+  
+    
 }
