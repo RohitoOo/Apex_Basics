@@ -1,0 +1,22 @@
+@isTest
+public class TestForceForecasting {
+    
+    static testmethod void insertUser(){
+        User u = new User(); 
+        u.FirstName = 'Rohito';
+        u.LastName = 'Bhambhani';
+        u.Email = 'johndoe@getnada.com';
+        u.Alias = 'dsadas';
+        u.Username = 'johndoe1@getnada.com';
+        u.ProfileId = '00e4x000002RD3s';
+        
+        u.TimeZoneSidKey = 'America/Denver';
+        u.LocaleSidKey = 'en_US';
+        u.EmailEncodingKey = 'UTF-8';
+        u.LanguageLocaleKey= 'en_US';
+       
+        insert u;
+        
+    }
+
+}
